@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+        crossorigin="anonymous"></script>
+    <script src="/public/requestHandler.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/public/styles.css" type="text/css">
+</head>
+<body>
+    <form id="loginForm" action="" method="POST">
+        <div id="loginTitle">SIGN IN</div>
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+            <button type="submit">Login</button>
+            <button id="signUpBtn">Sign up</button>
+            <a href="#" id="passForgot">Forgot password?</a>
+            <div style="margin-left: 49%;">or</div>
+        </div>
+    </form>
+</body>
+</html>
