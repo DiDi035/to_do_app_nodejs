@@ -4,7 +4,7 @@ import {itemSchema} from '../items/model'
 
 const userSchema = new mongoose.Schema({
     userName: String,
-    account: String,
+    email: String,
     password: String,
     toDoList: [itemSchema]
 });
@@ -12,4 +12,4 @@ const userSchema = new mongoose.Schema({
 module.exports = {
     userSchema: userSchema,
     userModel: mongoose.model('userModel', userSchema)
-}
+};

@@ -70,13 +70,13 @@ h1{
     text-indent: -10000px;
 }
 
-#loginTitle {
+.loginTitle {
   font-size: 40px;
   margin-left: 35%;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-#loginForm {
+.loginForm {
   margin-left: 38%;
   margin-top: 60px;
   padding-bottom: 10px;
@@ -85,7 +85,7 @@ h1{
   border: 3px solid #f1f1f1;
 }
 
-#loginForm input[type=text], input[type=password] {
+.loginForm input[type=text], input[type=password], input[type=email] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -96,7 +96,7 @@ h1{
   color: #989898;
 }
 
-#loginForm button {
+.loginForm button {
   background-color: red;
   color: white;
   padding: 14px 20px;
@@ -106,7 +106,7 @@ h1{
   width: 100%;
 }
 
-#loginForm button:hover {
+.loginForm button:hover {
   opacity: 0.8;
 }
 
@@ -125,7 +125,7 @@ span.psw {
   padding-top: 16px;
 }
 
-#loginForm #signUpBtn {
+.loginForm #signUpBtn {
   background-color: #23282e;
   color: #fff;
 }

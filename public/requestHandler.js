@@ -10,7 +10,7 @@ $(document).ready(function(){
             type: 'POST',
             url: '/save-new-item',
             data: todo,
-            success: function(data) {
+            success: function() {
                 // reload the page after handling the POST request
                 location.reload();
             }
@@ -26,6 +26,35 @@ $(document).ready(function(){
             url: '/delete-item/' + stringItem,
             success: function() {
                 $("#formTodo input").val(stringItem);                
+            }
+        })
+    })
+
+    $('#signUpBtn').on('click', () => {
+        $.ajax({
+            type: 'POST',
+            url: '/redirect-to-sign-up',
+            success: function(newUrl) {
+                if (newUrl.redirect) {
+                    window.location.href = newUrl.redirect;
+                }
+            }
+        })
+    })
+
+    $('#newUserBtn').on('click', () => {
+        $.ajax({
+            type: 'POST',
+            url: '/new-user',
+            data: {
+                username: $('#signUp input[type=text]').val(),
+                email: $('#signUp input[type=email]').val(),
+                password: $('#signUp input[type=password]').val()
+            },
+            success: (newUrl) => {
+                if (newUrl.redirect) {
+                    window.location.href = newUrl.redirect;
+                }
             }
         })
     })
