@@ -1,8 +1,5 @@
-
-// handle current user
-let currUser = " ";
-
 $(document).ready(function(){
+
     // handle submit item request
     $('#formTodo').on('submit', function(){
         let todo = {item: $('#formTodo input').val()};
@@ -36,6 +33,7 @@ $(document).ready(function(){
             url: '/redirect-to-sign-up',
             success: function(newUrl) {
                 if (newUrl.redirect) {
+                    console.log('success');
                     window.location.href = newUrl.redirect;
                 }
             }
@@ -47,9 +45,9 @@ $(document).ready(function(){
             type: 'POST',
             url: '/new-user',
             data: {
-                username: $('#signUp input[type=text]').val(),
-                email: $('#signUp input[type=email]').val(),
-                password: $('#signUp input[type=password]').val()
+                username: $('#uname').val(),
+                email: $('#mail').val(),
+                password: $('#psw1').val()
             },
             success: (newUrl) => {
                 if (newUrl.redirect) {
