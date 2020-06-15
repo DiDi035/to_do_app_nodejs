@@ -5,8 +5,6 @@ import mongoose from "mongoose";
 
 module.exports = function(app, currUser) {
 
-    currUser = 'baodihuynh';
-
     middlewares.configMiddlewares(app);
 
     // GET request
@@ -18,24 +16,21 @@ module.exports = function(app, currUser) {
         res.render('login');
     });
 
-    app.get('/lisu-to-do-app', function(req, res) {
-        if (currUser != ' ') {
-            userModel.findOne({userName: currUser}).then( result => {
-                if (result.userName === currUser) {
-                    res.render('mainTheme', {todo: result.toDoList});
-                } else {
-                    console.log('404: user not found');
-                }
-            })
-        } else {
-            console.log('404: user not found');
-        }
+    app.get('/lisu-to-do-app/:curUser', function(req, res) {
+        userModel.findOne({userName: req.params.curUser}).then( result => {
+            if (result.userName === req.params.curUser) {
+                currUser = req.params.curUser;
+                res.render('mainTheme', {todo: result.toDoList});
+            } else {
+                console.log('404: user not found');
+            }
+        })
     })
 
 
     // POST request
     app.post('/redirect-to-sign-up', (req, res) => {
-        res.json({redirect: '/sign-up'});
+        res.json({redirect: 'http://localhost:3000/sign-up'});
     })
 
     app.post('/save-new-item', middlewares.urlencodedParser, function(req, res) {
@@ -44,7 +39,7 @@ module.exports = function(app, currUser) {
                 if (result.userName === currUser) {
                     result.toDoList.push(req.body);
                     result.save().then(() => {
-
+                        res.end();
                     })
                 } else {
                     console.log('404: user not found');
@@ -64,10 +59,18 @@ module.exports = function(app, currUser) {
         });
         newUser.save().then(() => {
             currUser = req.body.username;
-            res.json({redirect: '/lisu-to-do-app'});
+            res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
         })
     })
 
+    app.post('/user-login', middlewares.urlencodedParser, (req, res) => {
+        let check = 0;
+        userModel.findOne({userName: req.body.username}).then( (users) => {
+            if (users.password === req.body.password) {
+                res.send({redirect: '/lisu-to-do-app/' + req.body.username});
+            }
+        })
+    })
 
     // DELETE request
     app.delete('/delete-item/:item', function(req, res) {
@@ -77,7 +80,7 @@ module.exports = function(app, currUser) {
                     if (result.toDoList[i].item === res.params.item) {
                         result.toDoList.splice(i, 1);
                         result.save().then(() => {
-                            break;
+                            res.end();
                         })
                     }
                 }

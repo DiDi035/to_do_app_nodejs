@@ -33,8 +33,7 @@ $(document).ready(function(){
             url: '/redirect-to-sign-up',
             success: function(newUrl) {
                 if (newUrl.redirect) {
-                    console.log('success');
-                    window.location.href = newUrl.redirect;
+                    location.assign(newUrl.redirect);
                 }
             }
         })
@@ -51,7 +50,24 @@ $(document).ready(function(){
             },
             success: (newUrl) => {
                 if (newUrl.redirect) {
-                    window.location.href = newUrl.redirect;
+                    location.assign(newUrl.redirect);
+                }
+            }
+        })
+    })
+
+    $('#loginBtn').on('click', () => {
+        $.ajax({
+            type: 'POST',
+            url: '/user-login',
+            data: {
+                username: $('#unameLogin').val(),
+                password: $('#psw').val()
+            },
+            dataType: 'json',
+            success: (newUrl) => {
+                if (typeof newUrl.redirect == 'string') {
+                    window.location = data.redirect
                 }
             }
         })

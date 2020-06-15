@@ -12,18 +12,18 @@
     <link rel="stylesheet" href="/public/styles.css" type="text/css">
 </head>
 <body>
-    <form class="loginForm" action="" >
+    <form id="loginForm" action="" >
         <div class="loginTitle">SIGN IN</div>
         <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" placeholder="Enter Username" name="uname" id="unameLogin">
         
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="psw" id="psw">
             <label>
               <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
-            <button type="submit">Login</button>
+            <button id="loginBtn" >Login</button>
             <button id="signUpBtn">Sign up</button>
             <a href="#" id="passForgot">Forgot password?</a>
             <div style="margin-left: 49%;">or</div>
