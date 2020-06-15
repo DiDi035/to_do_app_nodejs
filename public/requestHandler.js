@@ -66,8 +66,8 @@ $(document).ready(function(){
             },
             dataType: 'json',
             success: (newUrl) => {
-                if (typeof newUrl.redirect == 'string') {
-                    window.location = data.redirect
+                if (newUrl.redirect) {
+                    location.assign(newUrl.redirect);
                 }
             }
         })

@@ -64,12 +64,14 @@ module.exports = function(app, currUser) {
     })
 
     app.post('/user-login', middlewares.urlencodedParser, (req, res) => {
-        let check = 0;
-        userModel.findOne({userName: req.body.username}).then( (users) => {
-            if (users.password === req.body.password) {
-                res.send({redirect: '/lisu-to-do-app/' + req.body.username});
-            }
-        })
+        // userModel.findOne({userName: req.body.username}).then( (users) => {
+        //     if (users.password === req.body.password) {
+        //         currUser = req.body.username;
+        //         res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
+        //     }
+        // })
+        currUser = req.body.username;
+        res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
     })
 
     // DELETE request
