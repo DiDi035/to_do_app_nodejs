@@ -63,26 +63,24 @@ module.exports = function(app, currUser) {
         })
     })
 
-    app.post('/user-login', middlewares.urlencodedParser, (req, res) => {
-        // userModel.findOne({userName: req.body.username}).then( (users) => {
-        //     if (users.password === req.body.password) {
-        //         currUser = req.body.username;
-        //         res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
-        //     }
-        // })
-        currUser = req.body.username;
-        res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
+    app.post('/user-login', middlewares.urlencodedParser, async (req, res) => {
+        let users = await userModel.findOne({userName: req.body.username});
+        if (users.userName == req.body.username) {
+            currUser = req.body.username;
+            res.json({redirect: 'http://localhost:3000/lisu-to-do-app/' + req.body.username});
+        }
     })
 
     // DELETE request
     app.delete('/delete-item/:item', function(req, res) {
         userModel.findOne({userName: currUser}).then((result) => {
-            if (result.userName === currUser) {
+            console.log(result);
+            if (result.userName == currUser) {
                 for (let i = 0; i < result.toDoList.length; i++) {
-                    if (result.toDoList[i].item === res.params.item) {
+                    if (result.toDoList[i].item == res.params.item) {
                         result.toDoList.splice(i, 1);
                         result.save().then(() => {
-                            res.end();
+                            return res.end();
                         })
                     }
                 }
