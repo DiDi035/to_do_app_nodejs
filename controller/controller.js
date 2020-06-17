@@ -77,7 +77,8 @@ module.exports = function(app, currUser) {
             console.log(result);
             if (result.userName == currUser) {
                 for (let i = 0; i < result.toDoList.length; i++) {
-                    if (result.toDoList[i].item == res.params.item) {
+                    console.log(result.toDoList[i].item);
+                    if (result.toDoList[i].item == req.params.item) {
                         result.toDoList.splice(i, 1);
                         result.save().then(() => {
                             return res.end();
